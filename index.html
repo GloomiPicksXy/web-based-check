@@ -4,46 +4,74 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Moonton Multi Tool</title>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(to bottom right, #1e3c72, #2a5298);
+      color: #fff;
+    }
+    .container {
+      text-align: center;
+      max-width: 600px;
+      width: 90%;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    button {
+      margin: 10px;
+      padding: 15px 20px;
+      border: none;
+      background: linear-gradient(90deg, #ff7f50, #ff6f61, #ff4757);
+      border-radius: 5px;
+      color: #fff;
+      font-size: 1em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background: linear-gradient(90deg, #ff4757, #ff6f61, #ff7f50);
+      transform: scale(1.05);
+    }
+    input[type="file"] {
+      margin: 15px 0;
+    }
+    .output-container {
+      margin-top: 20px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 5px;
+    }
+    .rainbow-border {
+      border: 3px solid;
+      border-image: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet) 1;
+    }
+  </style>
 </head>
 <body>
-  <div id="app">
-    <!-- Main Menu -->
-    <div id="menu" class="menu">
-      <h1>Moonton Multi Tool</h1>
-      <p>Select a tool to begin</p>
-      <div class="menu-buttons">
-        <button class="menu-btn" onclick="showTool('checker')">Account Checker</button>
-        <button class="menu-btn" onclick="showTool('urlRemover')">URL Remover</button>
-        <button class="menu-btn" onclick="showTool('formatter')">Account Formatter</button>
-      </div>
-    </div>
+  <div class="container">
+    <h1>Moonton Multi Tool</h1>
+    <input type="file" id="fileInput" />
+    <br>
+    <button id="accCheckerBtn">Account Checker</button>
+    <button id="urlRemoverBtn">URL Remover</button>
+    <button id="accFormatterBtn">Account Formatter</button>
 
-    <!-- Account Checker Section -->
-    <div id="checker" class="tool-section hidden">
-      <h2>Account Checker</h2>
-      <input type="file" id="checkerFile" accept=".txt">
-      <button class="action-btn" onclick="processAccounts()">Start Checking</button>
-      <div id="checkerResult" class="result-container"></div>
-      <button class="back-button" onclick="goBack()">Go Back</button>
-    </div>
-
-    <!-- URL Remover Section -->
-    <div id="urlRemover" class="tool-section hidden">
-      <h2>URL Remover</h2>
-      <input type="file" id="urlFile" accept=".txt">
-      <button class="action-btn" onclick="removeUrls()">Start Removing</button>
-      <div id="urlResult" class="result-container"></div>
-      <button class="back-button" onclick="goBack()">Go Back</button>
-    </div>
-
-    <!-- Account Formatter Section -->
-    <div id="formatter" class="tool-section hidden">
-      <h2>Account Formatter</h2>
-      <input type="file" id="formatterFile" accept=".txt">
-      <button class="action-btn" onclick="formatAccounts()">Start Formatting</button>
-      <div id="formatterResult" class="result-container"></div>
-      <button class="back-button" onclick="goBack()">Go Back</button>
+    <div id="output" class="output-container rainbow-border" style="display: none;">
+      <h2>Results</h2>
+      <pre id="outputContent"></pre>
+      <button id="backBtn" style="display: none;">Go Back</button>
     </div>
   </div>
 
