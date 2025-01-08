@@ -8,18 +8,21 @@
 </head>
 <body>
   <div id="app">
-    <div class="menu">
+    <!-- Main Menu -->
+    <div id="menu" class="menu">
       <h1>Moonton Multi Tool</h1>
-      <button onclick="showTool('checker')">Account Checker</button>
-      <button onclick="showTool('urlRemover')">URL Remover</button>
-      <button onclick="showTool('formatter')">Account Formatter</button>
+      <div class="menu-buttons">
+        <button onclick="showTool('checker')">Account Checker</button>
+        <button onclick="showTool('urlRemover')">URL Remover</button>
+        <button onclick="showTool('formatter')">Account Formatter</button>
+      </div>
     </div>
 
     <!-- Tool Sections -->
     <div id="checker" class="tool-section hidden">
       <h2>Account Checker</h2>
       <input type="file" id="checkerFile" accept=".txt">
-      <button onclick="processAccounts()">Check Accounts</button>
+      <button onclick="processAccounts()">Start Checking</button>
       <div id="checkerResult" class="result-container"></div>
       <button class="back-button" onclick="goBack()">Go Back</button>
     </div>
@@ -27,7 +30,7 @@
     <div id="urlRemover" class="tool-section hidden">
       <h2>URL Remover</h2>
       <input type="file" id="urlFile" accept=".txt">
-      <button onclick="removeUrls()">Remove URLs</button>
+      <button onclick="removeUrls()">Start Removing</button>
       <div id="urlResult" class="result-container"></div>
       <button class="back-button" onclick="goBack()">Go Back</button>
     </div>
@@ -35,7 +38,7 @@
     <div id="formatter" class="tool-section hidden">
       <h2>Account Formatter</h2>
       <input type="file" id="formatterFile" accept=".txt">
-      <button onclick="formatAccounts()">Format Accounts</button>
+      <button onclick="formatAccounts()">Start Formatting</button>
       <div id="formatterResult" class="result-container"></div>
       <button class="back-button" onclick="goBack()">Go Back</button>
     </div>
