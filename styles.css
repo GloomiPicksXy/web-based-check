@@ -44,6 +44,11 @@ button:hover {
   background: linear-gradient(45deg, #ff9770, #ff6b6b);
 }
 
+.back-btn {
+  background: #4a90e2;
+  margin-top: 20px;
+}
+
 input[type="file"] {
   margin: 20px 0;
   padding: 10px;
@@ -54,13 +59,14 @@ input[type="file"] {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-pre {
+#toolContent {
+  margin-top: 20px;
   background: rgba(255, 255, 255, 0.8);
   color: #000;
   padding: 10px;
   border-radius: 5px;
-  overflow-x: auto;
   max-height: 400px;
+  overflow-y: auto;
   white-space: pre-wrap;
   text-align: left;
 }
