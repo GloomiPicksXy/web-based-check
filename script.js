@@ -1,14 +1,14 @@
-// Show specific tool section
+// Show the corresponding tool section
 function showTool(tool) {
-  document.getElementById("menu").classList.add("hidden");
+  document.getElementById("menu").style.display = 'none';
   document.querySelectorAll(".tool-section").forEach(section => section.classList.add("hidden"));
   document.getElementById(tool).classList.remove("hidden");
 }
 
-// Go back to main menu
+// Go back to the main menu
 function goBack() {
   document.querySelectorAll(".tool-section").forEach(section => section.classList.add("hidden"));
-  document.getElementById("menu").classList.remove("hidden");
+  document.getElementById("menu").style.display = 'block';
 }
 
 // Account Checker
@@ -17,7 +17,7 @@ async function processAccounts() {
   const resultContainer = document.getElementById("checkerResult");
 
   if (!fileInput.files[0]) {
-    resultContainer.innerHTML = `<div>Please select a file first.</div>`;
+    resultContainer.textContent = "Please select a file first.";
     return;
   }
 
@@ -25,10 +25,10 @@ async function processAccounts() {
   const text = await file.text();
   const accounts = text.split("\n").filter(Boolean);
 
-  resultContainer.innerHTML = `<div>Processing accounts...</div>`;
+  resultContainer.innerHTML = "Checking accounts...";
   const startTime = Date.now();
+  const results = [];
 
-  let results = [];
   for (const account of accounts) {
     const [uu, pp] = account.split(":").map(item => item.trim());
     try {
@@ -38,8 +38,8 @@ async function processAccounts() {
         body: JSON.stringify({ uu, pp })
       });
       const result = await response.text();
-      results.push(`${uu}:${result}`);
-    } catch (err) {
+      results.push(`${uu}: ${result}`);
+    } catch (error) {
       results.push(`${uu}: Error`);
     }
   }
@@ -51,9 +51,8 @@ async function processAccounts() {
   resultContainer.innerHTML = `
     <pre>
 Time Taken: ${timeTaken} seconds
-Total Processed: ${accounts.length}
-
-File Saved to: ${outputFile}
+Accounts Processed: ${accounts.length}
+File Saved: ${outputFile}
     </pre>
   `;
 }
@@ -64,21 +63,20 @@ async function removeUrls() {
   const resultContainer = document.getElementById("urlResult");
 
   if (!fileInput.files[0]) {
-    resultContainer.innerHTML = `<div>Please select a file first.</div>`;
+    resultContainer.textContent = "Please select a file first.";
     return;
   }
 
   const file = fileInput.files[0];
   const text = await file.text();
-  const urlsRemoved = text.replace(/https?:\/\/\S+/g, "");
+  const cleanedText = text.replace(/https?:\/\/\S+/g, "");
   const outputFile = `urls-removed-${Date.now()}.txt`;
-  saveToFile(outputFile, urlsRemoved);
+  saveToFile(outputFile, cleanedText);
 
   resultContainer.innerHTML = `
     <pre>
-Total Processed: ${text.split("\n").length}
-
-File Saved to: ${outputFile}
+Text Processed: ${text.split("\n").length}
+File Saved: ${outputFile}
     </pre>
   `;
 }
@@ -89,30 +87,24 @@ async function formatAccounts() {
   const resultContainer = document.getElementById("formatterResult");
 
   if (!fileInput.files[0]) {
-    resultContainer.innerHTML = `<div>Please select a file first.</div>`;
+    resultContainer.textContent = "Please select a file first.";
     return;
   }
 
   const file = fileInput.files[0];
   const text = await file.text();
-  const formatted = text.split("\n").map(line => line.trim().toLowerCase()).join("\n");
+  const formattedText = text.split("\n").map(line => line.trim().toLowerCase()).join("\n");
   const outputFile = `formatted-accounts-${Date.now()}.txt`;
-  saveToFile(outputFile, formatted);
+  saveToFile(outputFile, formattedText);
 
   resultContainer.innerHTML = `
     <pre>
-Total Processed: ${text.split("\n").length}
-
-File Saved to: ${outputFile}
+Text Processed: ${text.split("\n").length}
+File Saved: ${outputFile}
     </pre>
   `;
 }
 
-// Save data to file
+// Save text data as a downloadable file
 function saveToFile(filename, data) {
-  const blob = new Blob([data], { type: "text/plain" });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = filename;
-  link.click();
-}
+  const blob =
