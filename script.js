@@ -1,102 +1,110 @@
 const mainUI = document.getElementById("main-ui");
 const dynamicUI = document.getElementById("dynamic-ui");
 
-// Handles button clicks
-document.getElementById("acc-checker-btn").addEventListener("click", () => {
-  startAccountChecker();
-});
+// Event Listeners
+document.getElementById("acc-checker-btn").addEventListener("click", startAccountChecker);
+document.getElementById("url-remover-btn").addEventListener("click", startURLRemover);
+document.getElementById("acc-formatter-btn").addEventListener("click", startAccountFormatter);
 
-document.getElementById("url-remover-btn").addEventListener("click", () => {
-  startURLRemover();
-});
-
-document.getElementById("acc-formatter-btn").addEventListener("click", () => {
-  startAccountFormatter();
-});
-
-// Function for Account Checker
+// Account Checker
 function startAccountChecker() {
-  mainUI.style.display = "none"; // Hide main buttons
-  dynamicUI.style.display = "block"; // Show dynamic UI
+  mainUI.classList.add("hidden");
+  dynamicUI.classList.remove("hidden");
 
-  // Step 1: Ask for output folder
   dynamicUI.innerHTML = `
-    <h1>Account Checker</h1>
-    <label>Output Folder:</label>
-    <input type="text" id="output-folder" placeholder="Enter folder path" />
+    <h2>Account Checker</h2>
+    <div class="input-box">
+      <label for="output-folder">Output Folder:</label><br>
+      <input type="text" id="output-folder" placeholder="Enter folder path">
+    </div>
     <button id="start-checking-btn">Start Checking</button>
   `;
 
-  document
-    .getElementById("start-checking-btn")
-    .addEventListener("click", () => {
-      const outputFolder = document.getElementById("output-folder").value;
-      if (!outputFolder) {
-        alert("Please enter an output folder!");
-        return;
-      }
+  document.getElementById("start-checking-btn").addEventListener("click", () => {
+    const outputFolder = document.getElementById("output-folder").value;
+    if (!outputFolder) {
+      alert("Please enter an output folder.");
+      return;
+    }
 
-      // Step 2: Show progress
-      showProgress(outputFolder);
-    });
+    runAccountChecker(outputFolder);
+  });
 }
 
-function showProgress(outputFolder) {
+function runAccountChecker(outputFolder) {
   dynamicUI.innerHTML = `
-    <h1>Please be patient kupal, it's checking</h1>
-    <p id="time-remaining">Time remaining: Calculating...</p>
-    <p id="accounts-checked">Accounts checked: 0 - 0</p>
+    <h2>Please be patient kupal, it's checking</h2>
+    <div class="progress">
+      <p id="time-remaining">Time remaining: Calculating...</p>
+      <p id="accounts-checked">Accounts checked: 0 / 10</p>
+    </div>
   `;
 
-  // Mocking API call and progress
+  // Simulating the API call
   let totalAccounts = 10;
-  let checkedAccounts = 0;
+  let checked = 0;
 
   const interval = setInterval(() => {
-    checkedAccounts++;
-    document.getElementById(
-      "accounts-checked"
-    ).textContent = `Accounts checked: ${checkedAccounts} - ${totalAccounts}`;
-    document.getElementById("time-remaining").textContent = `Time remaining: ${
-      totalAccounts - checkedAccounts
-    } seconds`;
+    checked++;
+    document.getElementById("accounts-checked").innerText = `Accounts checked: ${checked} / ${totalAccounts}`;
+    document.getElementById("time-remaining").innerText = `Time remaining: ${totalAccounts - checked}s`;
 
-    if (checkedAccounts === totalAccounts) {
+    if (checked === totalAccounts) {
       clearInterval(interval);
-
-      // Step 3: Show results
       showResults(outputFolder, totalAccounts, totalAccounts - 1, 1);
     }
-  }, 1000); // Mocking 1-second intervals
+  }, 1000); // Simulate 1 second per account
 }
 
 function showResults(outputFolder, totalChecked, totalSuccess, totalFailed) {
   dynamicUI.innerHTML = `
-    <h1>Result mo kupal</h1>
-    <p>Time taken: 10 seconds</p>
-    <p>Total Checked: ${totalChecked}</p>
-    <p>Total Success: ${totalSuccess}</p>
-    <p>Total Failed: ${totalFailed}</p>
-    <p>File saved to: ${outputFolder}</p>
+    <h2>Results mo kupal</h2>
+    <div class="results">
+      <p>Time taken: 10 seconds</p>
+      <p>Total Checked: ${totalChecked}</p>
+      <p>Total Success: ${totalSuccess}</p>
+      <p>Total Failed: ${totalFailed}</p>
+      <p>File saved to: ${outputFolder}</p>
+    </div>
     <button id="back-btn">Back</button>
   `;
 
   document.getElementById("back-btn").addEventListener("click", () => {
-    dynamicUI.style.display = "none";
-    mainUI.style.display = "block";
+    dynamicUI.classList.add("hidden");
+    mainUI.classList.remove("hidden");
   });
 }
 
-// Mock URL Remover
+// URL Remover
 function startURLRemover() {
-  mainUI.style.display = "none";
-  dynamicUI.style.display = "block";
-  dynamicUI.innerHTML = `<h1>URL Remover Placeholder</h1>`;
+  mainUI.classList.add("hidden");
+  dynamicUI.classList.remove("hidden");
+
+  dynamicUI.innerHTML = `
+    <h2>URL Remover</h2>
+    <p>Coming soon...</p>
+    <button id="back-btn">Back</button>
+  `;
+
+  document.getElementById("back-btn").addEventListener("click", () => {
+    dynamicUI.classList.add("hidden");
+    mainUI.classList.remove("hidden");
+  });
 }
 
-// Mock Account Formatter
+// Account Formatter
 function startAccountFormatter() {
-  mainUI.style.display = "none";
-  dynamicUI.style.display = "block";
-  dynamicUI.innerHTML = `<h1>Account Formatter Placeholder</h1>`;
+  mainUI.classList.add("hidden");
+  dynamicUI.classList.remove("hidden");
+
+  dynamicUI.innerHTML = `
+    <h2>Account Formatter</h2>
+    <p>Coming soon...</p>
+    <button id="back-btn">Back</button>
+  `;
+
+  document.getElementById("back-btn").addEventListener("click", () => {
+    dynamicUI.classList.add("hidden");
+    mainUI.classList.remove("hidden");
+  });
 }
