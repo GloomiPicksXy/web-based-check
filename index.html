@@ -1,27 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moonton Multi Tool</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="container">
-    <h1>Moonton Multi Tool</h1>
-    <input type="file" id="fileInput" />
-    <div id="mainMenu">
-      <button onclick="showTool('checker')">Account Checker</button>
-      <button onclick="showTool('remover')">URL Remover</button>
-      <button onclick="showTool('formatter')">Account Formatter</button>
-    </div>
+<div id="main-ui">
+  <button id="acc-checker-btn">Account Checker</button>
+  <button id="url-remover-btn">URL Remover</button>
+  <button id="acc-formatter-btn">Account Formatter</button>
+</div>
 
-    <div id="toolUI" style="display: none;">
-      <div id="toolContent"></div>
-      <button class="back-btn" onclick="goBack()">Back to Menu</button>
-    </div>
-  </div>
-
-  <script src="scripts.js"></script>
-</body>
-</html>
+<div id="dynamic-ui" style="display: none;"></div>
