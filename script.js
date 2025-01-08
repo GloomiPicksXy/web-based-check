@@ -1,5 +1,6 @@
 // Show specific tool section
 function showTool(tool) {
+  document.getElementById("menu").classList.add("hidden");
   document.querySelectorAll(".tool-section").forEach(section => section.classList.add("hidden"));
   document.getElementById(tool).classList.remove("hidden");
 }
@@ -7,7 +8,7 @@ function showTool(tool) {
 // Go back to main menu
 function goBack() {
   document.querySelectorAll(".tool-section").forEach(section => section.classList.add("hidden"));
-  document.querySelector(".menu").classList.remove("hidden");
+  document.getElementById("menu").classList.remove("hidden");
 }
 
 // Account Checker
