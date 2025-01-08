@@ -1,7 +1,88 @@
-<div id="main-ui">
-  <button id="acc-checker-btn">Account Checker</button>
-  <button id="url-remover-btn">URL Remover</button>
-  <button id="acc-formatter-btn">Account Formatter</button>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utility Tool</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-<div id="dynamic-ui" style="display: none;"></div>
+    #container {
+      text-align: center;
+      width: 90%;
+      max-width: 600px;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    button {
+      display: inline-block;
+      margin: 10px;
+      padding: 15px 30px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .input-box {
+      margin: 20px 0;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 80%;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .progress, .results {
+      margin: 20px 0;
+    }
+
+    .progress p, .results p {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <!-- Main UI -->
+    <div id="main-ui">
+      <h1>Utility Tool</h1>
+      <button id="acc-checker-btn">Account Checker</button>
+      <button id="url-remover-btn">URL Remover</button>
+      <button id="acc-formatter-btn">Account Formatter</button>
+    </div>
+
+    <!-- Dynamic UI -->
+    <div id="dynamic-ui" class="hidden"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
