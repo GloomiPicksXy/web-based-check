@@ -11,34 +11,37 @@
     <!-- Main Menu -->
     <div id="menu" class="menu">
       <h1>Moonton Multi Tool</h1>
+      <p>Select a tool to begin</p>
       <div class="menu-buttons">
-        <button onclick="showTool('checker')">Account Checker</button>
-        <button onclick="showTool('urlRemover')">URL Remover</button>
-        <button onclick="showTool('formatter')">Account Formatter</button>
+        <button class="menu-btn" onclick="showTool('checker')">Account Checker</button>
+        <button class="menu-btn" onclick="showTool('urlRemover')">URL Remover</button>
+        <button class="menu-btn" onclick="showTool('formatter')">Account Formatter</button>
       </div>
     </div>
 
-    <!-- Tool Sections -->
+    <!-- Account Checker Section -->
     <div id="checker" class="tool-section hidden">
       <h2>Account Checker</h2>
       <input type="file" id="checkerFile" accept=".txt">
-      <button onclick="processAccounts()">Start Checking</button>
+      <button class="action-btn" onclick="processAccounts()">Start Checking</button>
       <div id="checkerResult" class="result-container"></div>
       <button class="back-button" onclick="goBack()">Go Back</button>
     </div>
 
+    <!-- URL Remover Section -->
     <div id="urlRemover" class="tool-section hidden">
       <h2>URL Remover</h2>
       <input type="file" id="urlFile" accept=".txt">
-      <button onclick="removeUrls()">Start Removing</button>
+      <button class="action-btn" onclick="removeUrls()">Start Removing</button>
       <div id="urlResult" class="result-container"></div>
       <button class="back-button" onclick="goBack()">Go Back</button>
     </div>
 
+    <!-- Account Formatter Section -->
     <div id="formatter" class="tool-section hidden">
       <h2>Account Formatter</h2>
       <input type="file" id="formatterFile" accept=".txt">
-      <button onclick="formatAccounts()">Start Formatting</button>
+      <button class="action-btn" onclick="formatAccounts()">Start Formatting</button>
       <div id="formatterResult" class="result-container"></div>
       <button class="back-button" onclick="goBack()">Go Back</button>
     </div>
